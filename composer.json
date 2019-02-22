@@ -32,6 +32,12 @@
             "enabled": false
         }
     },
+    "autoload": {
+        "psr-4": {
+            "Aliyun\\": "vendor/aliyun-dysms-php-sdk/lib/",
+            "Aliyun\\Test\\": "vendor/aliyun-dysms-php-sdk/tests/"
+        }
+    },
     "repositories": [
         {
             "type": "composer",

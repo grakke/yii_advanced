@@ -1,6 +1,7 @@
 <?php
 
 /* @var $this \yii\web\View */
+
 /* @var $content string */
 
 use yii\helpers\Html;
@@ -19,7 +20,7 @@ AppAsset::register($this);
     <meta charset="<?= Yii::$app->charset ?>">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <?= Html::csrfMetaTags() ?>
+    <?php $this->registerCsrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
 </head>
@@ -36,13 +37,16 @@ AppAsset::register($this);
         ],
     ]);
     $menuItems = [
-        ['label' => 'Home', 'url' => ['/site/index']],
-        ['label' => 'About', 'url' => ['/site/about']],
-        ['label' => 'Contact', 'url' => ['/site/contact']],
+//        ['label' => 'Home', 'url' => ['/site/index']],
+//        ['label' => 'About', 'url' => ['/site/about']],
+//        ['label' => 'Contact', 'url' => ['/site/contact']],
+        ['label' => \Yii::t('common', 'Home'), 'url' => ['/site/index']],
+        ['label' => \Yii::t('common', 'About'), 'url' => ['/site/about']],
+        ['label' => \Yii::t('common', 'Contact'), 'url' => ['/site/contact']],
     ];
     if (Yii::$app->user->isGuest) {
-        $menuItems[] = ['label' => 'Signup', 'url' => ['/site/signup']];
-        $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
+        $menuItems[] = ['label' => \Yii::t('common', 'Signup'), 'url' => ['/site/signup']];
+        $menuItems[] = ['label' => \Yii::t('common', 'Login'), 'url' => ['/site/login']];
     } else {
         $menuItems[] = '<li>'
             . Html::beginForm(['/site/logout'], 'post')
@@ -53,6 +57,19 @@ AppAsset::register($this);
             . Html::endForm()
             . '</li>';
     }
+    $menuItems[] = [
+        'label' => Yii::t('common', 'Language'),
+        'dropDownOptions' => ['id' => 'drow-language', 'style' => 'min-width:90px;'],
+        'items' => [
+            ['label' => Yii::t('common', '中文C'), 'options' => ['data-language' => 'zh', 'style' => 'cursor:pointer']],
+            ['label' => Yii::t('common', 'EnglishC'), 'options' => ['data-language' => 'en', 'style' => 'cursor:pointer']],
+
+            ['label' => Yii::t('common', '中文S'), 'url' => ['/demo/lan', 'language' => 'zh']],
+            ['label' => Yii::t('common', 'EnglishS'), 'url' => ['/demo/lan', 'language' => 'en']],
+        ],
+
+    ];
+
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => $menuItems,
@@ -78,6 +95,19 @@ AppAsset::register($this);
 </footer>
 
 <?php $this->endBody() ?>
+
+<?php $this->beginBlock('language') ?>
+$(function(){
+$('#drow-language li').on('click',function(){
+var language = $(this).attr('data-language');
+console.log(language);
+$.cookie('language',language,{'path':'/'});
+window.location.reload();
+});
+});
+<?php $this->endBlock() ?>
+<?php $this->registerJs($this->blocks['language'], \yii\web\View::POS_END); ?>
+
 </body>
 </html>
 <?php $this->endPage() ?>

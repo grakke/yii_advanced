@@ -212,4 +212,55 @@ class SiteController extends Controller
             'model' => $model,
         ]);
     }
+
+    /**
+     * @param string $message
+     * @return string
+     * @throws \yii\base\InvalidArgumentException
+     */
+    public function actionSay($message = 'Hello World!')
+    {
+        return $this->render('say', ['message' => $message]);
+    }
+
+    /**
+     * @return string
+     * @throws \yii\base\InvalidArgumentException
+     */
+    public function actionEntry()
+    {
+        $model = new EntryForm();
+
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+            return $this->render('entry-confirm', ['model' => $model]);
+        } else {
+            return $this->render('entry', ['model' => $model]);
+        }
+    }
+
+    public function actionRoute()
+    {
+        // 创建一个普通的路由URL：/index.php?r=post%2Findex
+        echo Url::to(['post/index']) . '<br>';
+
+        // 创建一个带路由参数的URL：/index.php?r=post%2Fview&id=100
+        echo Url::to(['post/view', 'id' => 100]) . '<br>';
+
+        // 创建一个带锚定的URL：/index.php?r=post%2Fview&id=100#content
+        echo Url::to(['post/view', 'id' => 100, '#' => 'content']) . '<br>';
+
+        // 创建一个绝对路径URL：http://www.example.com/index.php?r=post%2Findex
+        echo Url::to(['post/index'], true) . '<br>';
+
+        // 创建一个带https协议的绝对路径URL：https://www.example.com/index.php?r=post%2Findex
+        echo Url::to(['post/index'], 'https') . '<br>';
+
+        Yii::setAlias('@example', 'http://example.com/');
+        echo Url::to('@example');
+    }
+
+    public function actionNotice()
+    {
+        echo '维护';
+    }
 }

@@ -22,7 +22,8 @@
         "mero/yii2-monolog": "^0.1.2",
         "monolog/monolog": "^1.24",
         "psr/log": "^1.1",
-        "guzzlehttp/guzzle": "^6.3"
+        "guzzlehttp/guzzle": "^6.3",
+        "mdmsoft/yii2-admin": "^3.2"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",

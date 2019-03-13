@@ -52,11 +52,11 @@ return [
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
-            'enableStrictParsing' =>true,
+            'enableStrictParsing' => true,
             'rules' => [
                 [
                     'class' => 'yii\rest\UrlRule',
-                    'controller' => ['v1/goods','user'],
+                    'controller' => ['v1/goods', 'user'],
                     'pluralize' => false
                 ]
             ]

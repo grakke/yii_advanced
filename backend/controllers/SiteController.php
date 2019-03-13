@@ -1,4 +1,5 @@
 <?php
+
 namespace backend\controllers;
 
 use Yii;
@@ -13,6 +14,8 @@ use common\models\Sms;
  */
 class SiteController extends Controller
 {
+    public $layout = 'adminlte';
+
     /**
      * {@inheritdoc}
      */

@@ -53,7 +53,7 @@
 
         //语言配置项,默认是zh-cn。有需要的话也可以使用如下这样的方式来自动多语言切换，当然，前提条件是lang文件夹下存在对应的语言文件：
         //lang值也可以通过自动获取 (navigator.language||navigator.browserLanguage ||navigator.userLanguage).toLowerCase()
-        //,lang:"zh-cn"
+        ,lang:"en"
         //,langPath:URL +"lang/"
 
         //主题配置项,默认是default。有需要的话也可以使用如下这样的方式来自动多主题切换，当然，前提条件是themes文件夹下存在对应的主题文件：
@@ -74,27 +74,27 @@
 
         //,textarea:'editorValue' // 提交表单时，服务器获取编辑器提交内容的所用的参数，多实例时可以给容器name属性，会将name给定的值最为每个实例的键值，不用每次实例化的时候都设置这个值
 
-        //,initialContent:'欢迎使用ueditor!'    //初始化编辑器的内容,也可以通过textarea/script给值，看官网例子
+        ,initialContent:'欢迎使用ueditor!'    //初始化编辑器的内容,也可以通过textarea/script给值，看官网例子
 
         //,autoClearinitialContent:true //是否自动清除编辑器初始内容，注意：如果focus属性设置为true,这个也为真，那么编辑器一上来就会触发导致初始化的内容看不到了
 
         //,focus:false //初始化时，是否让编辑器获得焦点true或false
 
         //如果自定义，最好给p标签如下的行高，要不输入中文时，会有跳动感
-        //,initialStyle:'p{line-height:1em}'//编辑器层级的基数,可以用来改变字体等
+        ,initialStyle:'p{line-height:1em}'//编辑器层级的基数,可以用来改变字体等
 
         //,iframeCssUrl: URL + '/themes/iframe.css' //给编辑区域的iframe引入一个css文件
 
         //indentValue
         //首行缩进距离,默认是2em
-        //,indentValue:'2em'
+        ,indentValue:'2em'
 
-        //,initialFrameWidth:1000  //初始化编辑器宽度,默认1000
-        //,initialFrameHeight:320  //初始化编辑器高度,默认320
+        ,initialFrameWidth:800  //初始化编辑器宽度,默认1000
+        ,initialFrameHeight:300  //初始化编辑器高度,默认320
 
-        //,readonly : false //编辑器初始化结束后,编辑区域是否是只读的，默认是false
+        // ,readonly : true //编辑器初始化结束后,编辑区域是否是只读的，默认是false
 
-        //,autoClearEmptyNode : true //getContent时，是否删除空的inlineElement节点（包括嵌套的情况）
+        // ,autoClearEmptyNode : true //getContent时，是否删除空的inlineElement节点（包括嵌套的情况）
 
         //启用自动保存
         //,enableAutoSave: true
@@ -106,41 +106,41 @@
         //,imagePopup:true      //图片操作的浮层开关，默认打开
 
         //,autoSyncData:true //自动同步编辑器要提交的数据
-        //,emotionLocalization:false //是否开启表情本地化，默认关闭。若要开启请确保emotion文件夹下包含官网提供的images表情文件夹
+        // ,emotionLocalization:false //是否开启表情本地化，默认关闭。若要开启请确保emotion文件夹下包含官网提供的images表情文件夹
 
         //粘贴只保留标签，去除标签所有属性
         //,retainOnlyLabelPasted: false
 
         //,pasteplain:false  //是否默认为纯文本粘贴。false为不使用纯文本粘贴，true为使用纯文本粘贴
         //纯文本粘贴模式下的过滤规则
-        //'filterTxtRules' : function(){
-        //    function transP(node){
-        //        node.tagName = 'p';
-        //        node.setStyle();
-        //    }
-        //    return {
-        //        //直接删除及其字节点内容
-        //        '-' : 'script style object iframe embed input select',
-        //        'p': {$:{}},
-        //        'br':{$:{}},
-        //        'div':{'$':{}},
-        //        'li':{'$':{}},
-        //        'caption':transP,
-        //        'th':transP,
-        //        'tr':transP,
-        //        'h1':transP,'h2':transP,'h3':transP,'h4':transP,'h5':transP,'h6':transP,
-        //        'td':function(node){
-        //            //没有内容的td直接删掉
-        //            var txt = !!node.innerText();
-        //            if(txt){
-        //                node.parentNode.insertAfter(UE.uNode.createText(' &nbsp; &nbsp;'),node);
-        //            }
-        //            node.parentNode.removeChild(node,node.innerText())
-        //        }
-        //    }
-        //}()
+        ,'filterTxtRules' : function(){
+           function transP(node){
+               node.tagName = 'p';
+               node.setStyle();
+           }
+           return {
+               //直接删除及其字节点内容
+               '-' : 'script style object iframe embed input select',
+               'p': {$:{}},
+               'br':{$:{}},
+               'div':{'$':{}},
+               'li':{'$':{}},
+               'caption':transP,
+               'th':transP,
+               'tr':transP,
+               'h1':transP,'h2':transP,'h3':transP,'h4':transP,'h5':transP,'h6':transP,
+               'td':function(node){
+                   //没有内容的td直接删掉
+                   var txt = !!node.innerText();
+                   if(txt){
+                       node.parentNode.insertAfter(UE.uNode.createText(' &nbsp; &nbsp;'),node);
+                   }
+                   node.parentNode.removeChild(node,node.innerText())
+               }
+           }
+        }()
 
-        //,allHtmlEnabled:false //提交到后台的数据是否包含整个html字符串
+        ,allHtmlEnabled:false //提交到后台的数据是否包含整个html字符串
 
         //insertorderedlist
         //有序列表的下拉配置,值留空时支持多语言自动识别，若配置值，则以此值为准
@@ -282,8 +282,8 @@
         //scaleEnabled
         //是否可以拉伸长高,默认true(当开启时，自动长高失效)
         //,scaleEnabled:false
-        //,minFrameWidth:800    //编辑器拖动时最小宽度,默认800
-        //,minFrameHeight:220  //编辑器拖动时最小高度,默认220
+        ,minFrameWidth:600    //编辑器拖动时最小宽度,默认800
+        ,minFrameHeight:300  //编辑器拖动时最小高度,默认220
 
         //autoFloatEnabled
         //是否保持toolbar的位置不动,默认true

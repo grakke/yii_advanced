@@ -39,6 +39,7 @@ return [
                 ],
             ],
         ],
+        // 异常处理方法配置
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
@@ -49,14 +50,20 @@ return [
             'assignmentTable' => '{{%auth_assignment}}',
             'ruleTable' => '{{%auth_rule}}'
         ],
-        /*
         'urlManager' => [
-            'enablePrettyUrl' => true,
+            'enablePrettyUrl' => false,
             'showScriptName' => false,
             'rules' => [
+//                'posts/<year:\d{4}>/<category>' => 'post/index',
+//                'posts' => 'post/index',
+//                'post/<id:\d+>' => 'post/view',
+//                '<controller:(post|comment)>/<id:\d+>/<action:(create|update|delete)>' => '<controller>/<action>',
+//                '<controller:(post|comment)>/<id:\d+>' => '<controller>/view',
+//                '<controller:(post|comment)>' => '<controller>/index',
+
             ],
         ],
-        */
     ],
+
     'params' => $params,
 ];

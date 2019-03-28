@@ -66,6 +66,10 @@ create table homeland select * from country
 * session开启与类型设置
 
 
+## 前台
+
+## 后台
+
 ## Rest
 
 GET /users: 逐页列出所有用户
@@ -87,3 +91,5 @@ URL rule class must implement UrlRuleInterface
 http://youdomain/articles?access-token=y3XWtwWaxqCEBDoE-qzZk0bCp3UKO920
 传递 header头信息
 Authorization:Bearer y3XWtwWaxqCEBDoE-qzZk0bCp3UKO920
+
+## console

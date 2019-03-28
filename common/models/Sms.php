@@ -172,4 +172,35 @@ class Sms
 
         return $acsResponse;
     }
+
+
+    public static function sendToPhone($phone, $content)
+    {
+        include_once Yii::$app->basePath . '/vendor/alidayu/TopSdk.php';
+        include_once Yii::$app->basePath . '/vendor/alidayu/top/TopClient.php';
+        include_once Yii::$app->basePath . '/vendor/alidayu/top/request/AlibabaAliqinFcSmsNumSendRequest.php';
+        include_once Yii::$app->basePath . '/vendor/alidayu/top/ResultSet.php';
+        include_once Yii::$app->basePath . '/vendor/alidayu/top/RequestCheckUtil.php';
+
+        $req = new \AlibabaAliqinFcSmsNumSendRequest;
+        $req->setSmsType("normal");
+        $req->setSmsFreeSignName(Yii::$app->params['sign_name']);
+        $req->setSmsParam(json_encode(['code' => (string)$content]));
+        $req->setRecNum((string)$phone);
+        $req->setSmsTemplateCode(Yii::$app->params['template_code']);
+
+        $c = new \TopClient();
+        $c->appkey = Yii::$app->params['app_key'];
+        $c->secretKey = Yii::$app->params['app_secret'];
+
+        return $c->execute($req);
+    }
+
+    public static function isMobile($mobile)
+    {
+        if (!is_numeric($mobile)) {
+            return false;
+        }
+        return preg_match('#^13[\d]{9}$|^14[5,7]{1}\d{8}$|^15[^4]{1}\d{8}$|^17[0,6,7,8]{1}\d{8}$|^18[\d]{9}$#', $mobile) ? true : false;
+    }
 }

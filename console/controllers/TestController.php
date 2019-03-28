@@ -9,6 +9,7 @@
 namespace console\controllers;
 
 use yii\console\Controller;
+use yii\console\widgets\Table;
 
 /**
  * This command echoes the first argument that you have entered.
@@ -70,10 +71,48 @@ class TestController extends Controller
     {
         echo Table::widget([
         ’headers’ => [’Project’, ’Status’, ’Participant’],
-        ’rows’ => [
-                [’Yii’, ’OK’, ’@samdark’],
-                [’Yii’, ’OK’, ’@cebe’],
-            ],
+        // ’rows’ => [
+        //         [’Yii’, ’OK’, ’@samdark’],
+        //         [’Yii’, ’OK’, ’@cebe’],
+        //     ],
         ]);
+    }
+
+    public function actionTest6()
+    {
+
+        if (!empty($datas) && is_array($datas) && count($datas)) {
+
+            $db = Yii::$app->db;
+            $transaction = $db->beginTransaction();
+            $i = 0;
+            try {
+                $db->createCommand()->truncateTable('xnews_users')->execute();
+
+                foreach ($datas as $data) {
+                    $customer = new Users();
+                    unset($data['type']);
+                    $data['dateline'] = strtotime($data['dateline']);
+                    if ($data['sex'] === '女') {
+                        $data['sex'] = 2;
+                    } elseif ($data['sex'] === '男') {
+                        $data['sex'] = 1;
+                    } else {
+                        $data['sex'] = 0;
+                    }
+                    $customer->attributes = $data;
+                    $customer->save();
+                    $i++;
+                }
+
+                $transaction->commit();
+            } catch (\Exception $e) {
+                $transaction->rollBack();
+                throw $e;
+            } catch (\Throwable $e) {
+                $transaction->rollBack();
+                throw $e;
+            }
+        }
     }
 }

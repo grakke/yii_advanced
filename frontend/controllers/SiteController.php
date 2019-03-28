@@ -3,6 +3,7 @@ namespace frontend\controllers;
 
 use Yii;
 use yii\base\InvalidParamException;
+use yii\helpers\Url;
 use yii\web\BadRequestHttpException;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
@@ -18,6 +19,7 @@ use frontend\models\ContactForm;
  */
 class SiteController extends Controller
 {
+//    public $layout = 'new';
     /**
      * {@inheritdoc}
      */

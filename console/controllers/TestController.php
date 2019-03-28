@@ -9,6 +9,7 @@
 namespace console\controllers;
 
 use yii\console\Controller;
+use yii\console\ExitCode;
 use yii\console\widgets\Table;
 
 /**
@@ -21,98 +22,63 @@ use yii\console\widgets\Table;
  */
 class TestController extends Controller
 {
-    // public $message;
+    public $message;
 
-    // public function options($actionID)
-    // {
-    //     return [’message’];
-    // }
-    // public function optionAliases()
-    // {
-    //     return [’m’ => ’message’];
-    // }
+    public function options($actionID)
+    {
+        return ['message'];
+    }
+
+    public function optionAliases()
+    {
+        return ['m' => 'message'];
+    }
+
+    public function actionInputAlias()
+    {
+        echo $this->message . "\n";
+        return ExitCode::OK;
+    }
+
     /**
      * This command echoes what you have entered as the message.
      * @param string $message the message to be echoed.
      *
-     * ./yii test/index 'Hello henry34'
+     * @return int
      */
     public function actionIndex($message = 'hello world')
     {
         echo $message . "\n";
+        return ExitCode::OK;
     }
 
-    public function actionCreate()
-    {
-        echo 'advanced';
-    }
-
-    // public function actionTest2()
-    // {
-    //     echo $this->message . "\n";
-    // }
-// ./yii test/index 3 4 5
-    public function actionTest3($arg1, $arg2, $arg3)
+    public function actionInputArgs($arg1, $arg2, $arg3)
     {
         echo $arg1 . "\n";
         echo $arg2 . "\n";
         echo $arg3 . "\n";
+        return ExitCode::OK;
     }
 
-//./yii test/test4 hello,world
-    public function actionTest4(array $name)
+    public function actionInputArray(array $name)
     {
         $this->stdout("Hello?\n");
         echo $name[0] . "\n";
         echo $name[1] . "\n";
+        return ExitCode::OK;
     }
 
-    public function actionTest5()
+    public function actionOutputTable()
     {
         echo Table::widget([
-        ’headers’ => [’Project’, ’Status’, ’Participant’],
-        // ’rows’ => [
-        //         [’Yii’, ’OK’, ’@samdark’],
-        //         [’Yii’, ’OK’, ’@cebe’],
-        //     ],
+            'headers' => ['Project', 'Status', 'Participant'],
+            'rows' => [
+                ['Yii', 'OK', '@samdark'],
+                ['Yii', 'OK', '@cebe'],
+            ],
         ]);
+        return ExitCode::OK;
     }
 
-    public function actionTest6()
-    {
 
-        if (!empty($datas) && is_array($datas) && count($datas)) {
-
-            $db = Yii::$app->db;
-            $transaction = $db->beginTransaction();
-            $i = 0;
-            try {
-                $db->createCommand()->truncateTable('xnews_users')->execute();
-
-                foreach ($datas as $data) {
-                    $customer = new Users();
-                    unset($data['type']);
-                    $data['dateline'] = strtotime($data['dateline']);
-                    if ($data['sex'] === '女') {
-                        $data['sex'] = 2;
-                    } elseif ($data['sex'] === '男') {
-                        $data['sex'] = 1;
-                    } else {
-                        $data['sex'] = 0;
-                    }
-                    $customer->attributes = $data;
-                    $customer->save();
-                    $i++;
-                }
-
-                $transaction->commit();
-            } catch (\Exception $e) {
-                $transaction->rollBack();
-                throw $e;
-            } catch (\Throwable $e) {
-                $transaction->rollBack();
-                throw $e;
-            }
-        }
-    }
 }

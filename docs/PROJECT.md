@@ -93,3 +93,30 @@ http://youdomain/articles?access-token=y3XWtwWaxqCEBDoE-qzZk0bCp3UKO920
 Authorization:Bearer y3XWtwWaxqCEBDoE-qzZk0bCp3UKO920
 
 ## console
+
+* `./yii test/index 'Hello henry34'`
+* `./yii test/input-alias -m Arsenal`
+* `./yii test/input-args 3 4 5`
+* `./yii test/input-array hello,world`
+* `./yii test/output-table`
+
+
+## 事物
+
+```php
+
+$db = Yii::$app->db;
+$transaction = $db->beginTransaction();
+$i = 0;
+try {
+    $db->createCommand()->truncateTable('xnews_users')->execute();
+
+    $transaction->commit();
+} catch (\Exception $e) {
+    $transaction->rollBack();
+    throw $e;
+} catch (\Throwable $e) {
+    $transaction->rollBack();
+    throw $e;
+}
+```

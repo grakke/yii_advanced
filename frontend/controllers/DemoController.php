@@ -172,4 +172,10 @@ class DemoController extends Controller
         $logger = $logger = $monologComponent->getLogger("channel1");
         $logger->log('warning', 'Hello world');
     }
+
+    
+    public function actionBootstrap(){
+
+        return $this->render('bootstrap');
+    }
 }

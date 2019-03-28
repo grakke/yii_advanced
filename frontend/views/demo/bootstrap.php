@@ -1,0 +1,1 @@
+<?= yii\bootstrap\Progress::widget(['percent' => 60, 'label' => 'test']) ?>

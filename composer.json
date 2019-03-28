@@ -26,10 +26,12 @@
         "mdmsoft/yii2-admin": "^3.2",
         "phpoffice/phpspreadsheet": "^1.6",
         "yiisoft/yii2-httpclient": "*",
-        "codeception/codeception": "^2.5"
+        "codeception/codeception": "^2.5",
+        "yiisoft/yii2-queue": "^2.2",
+        "yiisoft/yii2-debug": "^2.1",
+        "yiisoft/yii2-bootstrap4": "^2.0"
     },
     "require-dev": {
-        "yiisoft/yii2-debug": "~2.0.0",
         "yiisoft/yii2-gii": "~2.0.0",
         "yiisoft/yii2-faker": "~2.0.0",
         "codeception/base": "^2.2.3",

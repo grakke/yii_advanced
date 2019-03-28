@@ -56,17 +56,17 @@ return [
             ],
         ],
         'cache' => [
-            'class' => 'yii\redis\Cache',
-            'redis' => [
-                'hostname' => 'localhost',
-                'port' => 6379,
-                'database' => 0,
-            ],
+//            'class' => 'yii\redis\Cache',
+//            'redis' => [
+//                'hostname' => 'localhost',
+//                'port' => 6379,
+//                'database' => 0,
+//            ],
         ],
         'session' => [
             // this is the name of the session cookie used for login on the frontend
             'name' => 'advanced-frontend',
-            'class' => 'yii\redis\Session',
+//            'class' => 'yii\redis\Session',
         ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,

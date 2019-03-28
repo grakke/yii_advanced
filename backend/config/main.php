@@ -35,6 +35,15 @@ return [
             'targets' => [
                 [
                     'class' => 'yii\log\FileTarget',
+                    // 'transport' => [
+                    //     'class' => 'Swift_SmtpTransport',
+                    //     'host' => 'localhost',
+                    //     'username' => 'username',
+                    //     'password' => 'password',
+                    //     'port' => '587',
+                    //     'encryption' => 'tls',
+                    // ],
+                    'categories' => ['yii\swiftmailer\Logger::add'],
                     'levels' => ['error', 'warning'],
                 ],
             ],
@@ -62,6 +71,10 @@ return [
 //                '<controller:(post|comment)>' => '<controller>/index',
 
             ],
+        ],
+        'mailer' => [
+            'class' => 'yii\swiftmailer\Mailer',
+            'enableSwiftMailerLogging' => true,
         ],
     ],
 

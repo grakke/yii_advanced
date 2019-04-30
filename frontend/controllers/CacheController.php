@@ -44,8 +44,7 @@ class CacheController extends Controller
 
     public function actionIndex()
     {
-        echo 'Index';
-        die;
+        echo $this->render('_index', ['data' => ['name' => 'index', 'count' =>34, 'label' => 'test']]);
     }
 
     public function actionList()

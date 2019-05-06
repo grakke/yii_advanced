@@ -6,11 +6,12 @@ use yii\web\Controller;
 use yii\helpers\Html;
 use yii\helpers\ArrayHelper;
 use frontend\models\User;
+use frontend\models\Country;
 
 class HelperController extends Controller {
 
 	public function actionHtml(){
-		echo Html::encode('Test > test');
+		echo Html::encode('Test > test');	
 	}
 
 	public function actionArray(){
@@ -97,6 +98,54 @@ class HelperController extends Controller {
 		$associative = ['Framework' => 'Yii', 'version' => '2.0'];
 		var_dump(ArrayHelper::isAssociative($associative));
 
+		// decode encode
+		$data = ["hello &nbsp; &amp;world", '&gt;/ safsd'];
+		var_dump(ArrayHelper::htmlEncode($data));
+		var_dump(ArrayHelper::htmldecode($data));
+
+		// merge
+		$array1 =[
+			'name' =>'Yii',
+			'version' => '1.1',
+			'ids' => [1],
+			'validDomains' => [
+				'example.com',
+				'www.example.com'
+			],
+			'emails' => [
+				'admin' => 'admin@example.com',
+				'dev' => 'dev@example.com'
+			],
+		];
+
+		$array2 =[
+			'name' =>'Yii',
+			'version' => '2.0',
+			'ids' => [2],
+			'validDomains' => [
+				'yiiframework.com',
+				'www.yiiframework.com'
+			],
+			'emails' => [
+				'admin' => 'admin@yiiframework.com',
+			],
+		];
+		var_dump(ArrayHelper::merge($array1, $array2));
+
+		// convert object to array
+		$countrys = Country::find()->limit(10)->all();
+		var_dump(ArrayHelper::toArray($countrys, [
+			'frontend\models\Country' => [
+				'code', 'name', 'length' =>function($country) {
+					return strlen($country->population);
+				}
+			]
+		]));
+
+		// check in:failed
+		// echo \yii\base\ArrayHelper::isIn('a', ['a']);
+		// echo \yii\base\ArrayHelper::isIn('a', new(ArrayObject['a']));
+		// echo \yii\base\ArrayHelper::isSubset(new(ArrayObject['a', 'c']), new(ArrayObject['a', 'b', 'c']));
 		die;
 	}
 

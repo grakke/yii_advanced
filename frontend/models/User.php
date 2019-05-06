@@ -13,6 +13,10 @@ use yii\db\ActiveRecord;
 
 class User extends ActiveRecord
 {
+    public $name ='bluebird89';
+    public $firstName ='Henry';
+    public $lastName ='Lee';
+
     const SCENARIO_LOGIN = 'login';
     const SCENARIO_REGISTER = 'register';
 

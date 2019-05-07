@@ -63,8 +63,10 @@ create table homeland select * from country
 * Gii
 * widget
     - LinkerPager
-* AssetBundle:
-
+* AssetBundle
+* Query Builder
+* Active Record:模型，继承一下就能用，使用频次低的 不建议用模型
+  * 关联关系
 
 ## Helper
 

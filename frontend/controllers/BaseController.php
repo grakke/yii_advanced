@@ -55,4 +55,8 @@ class BaseController extends Controller
 
 		var_dump($command, $sql, $rows);die;
 	}
+
+	public function actionActive(){
+		$orders = $customer->getOrders()->andWhere('status=1')->asArray()->all();
+	}
 }

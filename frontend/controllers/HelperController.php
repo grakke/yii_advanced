@@ -2,11 +2,13 @@
 
 namespace frontend\controllers;
 
+use Yii;
 use yii\web\Controller;
 use yii\helpers\Html;
 use yii\helpers\ArrayHelper;
 use frontend\models\User;
 use frontend\models\Country;
+use yii\helpers\Url;
 
 class HelperController extends Controller {
 
@@ -151,6 +153,50 @@ class HelperController extends Controller {
 		// echo \yii\base\ArrayHelper::isIn('a', ['a']);
 		// echo \yii\base\ArrayHelper::isIn('a', new(ArrayObject['a']));
 		// echo \yii\base\ArrayHelper::isSubset(new(ArrayObject['a', 'c']), new(ArrayObject['a', 'b', 'c']));
+		die;
+	}
+
+// Url::to():参数必须为数组
+	public function actionUrl(){
+		echo 'Base:' . Url::toRoute('site/index') . '<br>';
+		echo 'Base:' . Url::to(['site/index']) . '<br>';
+		echo 'With host:' . Url::toRoute('site/index', true) . '<br>';
+		echo 'With HTTPS:' . Url::toRoute('site/index', 'https') . '<hr>';
+		echo Url::to() . '<br>';
+		echo Url::to('@web/images/logo.jpg') . '<br>';
+		echo Url::to('images/logo.jpg') . '<br>';
+		echo 'To anchor:' . Url::toRoute(['site/index', 'src' => 'ref1', '#' => 'name']) . '<br>';
+		// alias
+		// echo Url::toRoute(['@postEdit', 'id' => 100]) . '<br>';
+
+		// add get parameters  to url
+		echo Url::current() . '<br>';
+		echo Url::current(['key1' => 'value1']) . '<hr>';
+		echo 'Remember: <br>';
+		// remeber, no name use default 
+		Url::remember();
+		echo Url::previous() . '<br>';
+
+		Url::remember(['product/view', 'id' =>42]);
+		echo Url::previous() . '<br>';
+		// add alias
+		Url::remember(['product/view', 'id' =>43], 'product');
+		echo Url::previous() . '<br>';
+		echo Url::previous('product') . '<br>';
+
+		echo Url::isRelative('test/it') . '<br>';
+
+		Yii::setAlias('@example', 'http://example.com/');
+        echo Url::to('@example');
+
+		die;
+	}
+
+
+	public function actionBase(){
+		// echo dirname("@web/js/");
+		var_dump($this->context);
+
 		die;
 	}
 

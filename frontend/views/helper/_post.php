@@ -1,0 +1,1 @@
+<p><?= 'Code: ' . $item->code . '; Name: ' . $item->name . '; Population:' . $item->population . '.'?></p>

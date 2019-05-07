@@ -12,8 +12,11 @@ class HelperController extends Controller {
 
 	public function actionHtml(){
 		$this->layout = false;
-		// echo Html::encode('Test > test');	
-		return $this->render('html');
+		// echo Html::encode('Test > test');
+
+		return $this->render('html', [
+			'posts' => Country::find()->all()
+		]);
 	}
 
 	public function actionArray(){

@@ -88,20 +88,26 @@ echo Html::endForm();
 echo Html::endTag('div');
 
 # add style
-echo Html::style('.danger {color: #f00; background-color: yellow;}')
+echo Html::style('.danger {color: #f00; background-color: yellow;}');
 ?>
-
 <p class="danger">Gives you</p>
-<!-- <style>.danger{color:#f00; background-color: yellow;} </style> -->
 
 <!-- add script -->
 <?= Html::script('alert("Hello!");', ['defer' => true]) ?>
 <!-- <script defer> alert('Hello!')</script> -->
 
-<!-- <?= Html::cssFile('@web/css/site.css', ['condition' => 'IE5']) ?> -->
+<?= Html::cssFile('@web/css/site.css', ['condition' => 'IE5']) ?>
 <?= Html::cssFile('@web/css/site.css') ?>
 
 <!-- [if IE 5] -->
 <!-- <link rel="stylesheet" type="text/css" href="css/site.css"> -->
 <!-- ![endif] -->
 <?= Html::jsFile('@web/js/jquery.cookie.js') ?>
+
+<?= Html::a('Profile-Link', ['user/view', 'id' => 1], ['class' => 'profile-link']); ?>
+
+<?= Html::img('@web/images/logo.jpg', ['alt' => 'My logo', 'style' => ['width'=> '60%', 'height' => '60%']]); ?>
+
+<?= Html::ul($posts, ['item' => function($item, $index) {
+	return Html::tag('li', $this->render('_post', ['item' =>$item ]), ['class' => 'post']);
+}]) ?>

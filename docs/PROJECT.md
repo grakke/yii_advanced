@@ -34,12 +34,21 @@ INSERT INTO `country` VALUES ('US','United States',278357000);
 create table homeland select * from country
 ```
 
+## Compontent
+
+* 属性（Property）
+* 事件（Event）
+* 行为（Behavior）
+
 ## URI
 
 * r=site/say
 * r=gii
 * r=homeland
 
+## 配置
+
+* `catchAll`:存在的话，开启维护模式
 
 ## 信息
 
@@ -54,12 +63,24 @@ create table homeland select * from country
 * Gii
 * widget
     - LinkerPager
+* AssetBundle:
 
 
+## Helper
 
-    属性（Property）
-    事件（Event）
-    行为（Behavior）
+* ArrayHelper
+* Console
+* FileHelper
+* FormatConverter
+* Html
+* HtmlPurifier
+* Imagine (provided by yii2-imagine extension)
+* Inflector
+* Json
+* Markdown
+* StringHelper
+* Url
+* VarDumper
 
 ## 问题
 
@@ -70,7 +91,7 @@ create table homeland select * from country
 
 ## 后台
 
-## Rest
+## REST API
 
 GET /users: 逐页列出所有用户
 HEAD /users: 显示用户列表的概要信息

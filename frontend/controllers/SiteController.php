@@ -242,6 +242,7 @@ class SiteController extends Controller
 
     public function actionNotice()
     {
-        echo '维护';
+        echo '正在维护';
+        die;
     }
 }

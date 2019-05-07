@@ -41,8 +41,8 @@ class BaseController extends Controller
 	}
 
 	public function actionWidget(){
-		$models = \frontend\models\Country::findAll(['>', 'population', '59225700']);
+		$model = \frontend\models\Country::findOne(['code' => 'CN']);
 
-		return $this->render('widget', ['models' => $models]);
+		return $this->render('widget', ['model' => $model]);
 	}
 }

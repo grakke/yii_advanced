@@ -4,16 +4,20 @@ use yii\widgets\Menu;
 use yii\widgets\ActiveForm;
 use yii\helpers\Html;
 
-echo Menu::widget(['items' => $models]);
+// echo Menu::widget(['item' => $model]);
 
 $form = ActiveForm::begin([
 	'options' => ['class' => 'form-horizontal'],
 	'fieldConfig' => ['inputOptions' => ['class' => 'input-xlarge']],
 ]);
 
-echo Html::BeginTag('div');
-echo Html::input('text', 'username', 'Bluebird89', ['class' => 'username']);
-echo Html::activeInput('text', new \frontend\models\User(), 'firstName', ['class' => 'username']);
-echo Html::endTag('div');
+echo $form->field($model, 'code');
+echo $form->field($model, 'name');
+echo $form->field($model, 'population');
+?>
+<div class="form-group">
+	<?= Html::submitButton('Save') ?>
+</div>
 
-ActiveForm::end();
+
+<?php ActiveForm::end(); ?>

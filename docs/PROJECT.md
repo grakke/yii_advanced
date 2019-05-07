@@ -49,13 +49,21 @@ create table homeland select * from country
 ## 配置
 
 * `catchAll`:存在的话，开启维护模式
+* Url: 解析与生成
+
+```
+php yii serve
+php requirement.php
+```
 
 ## 信息
 
 * Yii::$app：应用实例，它是一个全局可访问的单例。也是一个服务定位器， 能提供 request，response，db 等等特定功能的组件
 * rules: yii\widgets\ActiveForm 足够智能到把你在 EntryForm 模型中声明的验证规则转化成客户端 JavaScript 脚本去执行验证.服务端验证则都是必须的
 
-## 组件
+## 模块 modules
+
+## 组件 compontent
 
 * ActiveForm
 * ActiveRecord
@@ -67,6 +75,8 @@ create table homeland select * from country
 * Query Builder
 * Active Record:模型，继承一下就能用，使用频次低的 不建议用模型
   * 关联关系
+* yii\base\Behavior
+* yii\web\identifyInterface
 
 ## Helper
 

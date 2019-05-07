@@ -80,14 +80,17 @@ return [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
-        /*
+        
         'urlManager' => [
+            // true 不带r
             'enablePrettyUrl' => true,
-            'showScriptName' => false,
+            'showScriptName' => true,
             'rules' => [
+                'pattern' => 'post/<page:\d+>/tag',
+                'route' => 'post/index',
+                // 'defaults' => ['page' => 1],
             ],
         ],
-        */
     ],
     # 维护功能
     'catchAll' => [

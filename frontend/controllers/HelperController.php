@@ -11,7 +11,7 @@ use frontend\models\Country;
 class HelperController extends Controller {
 
 	public function actionHtml(){
-		// $this->layout = false;
+		$this->layout = false;
 		// echo Html::encode('Test > test');	
 		return $this->render('html');
 	}

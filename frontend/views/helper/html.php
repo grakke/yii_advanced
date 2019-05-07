@@ -44,6 +44,7 @@ echo Html::BeginTag('div');
 echo Html::input('text', 'username', 'Bluebird89', ['class' => 'username']);
 echo Html::activeInput('text', new \frontend\models\User(), 'firstName', ['class' => 'username']);
 echo Html::getInputName(new \frontend\models\User(), 'name');
+
 echo Html::getAttributeValue(new \frontend\models\User(), 'name');
 echo Html::endTag('div');
 
@@ -85,3 +86,22 @@ echo Html::endTag('div');
 
 echo Html::endForm();
 echo Html::endTag('div');
+
+# add style
+echo Html::style('.danger {color: #f00; background-color: yellow;}')
+?>
+
+<p class="danger">Gives you</p>
+<!-- <style>.danger{color:#f00; background-color: yellow;} </style> -->
+
+<!-- add script -->
+<?= Html::script('alert("Hello!");', ['defer' => true]) ?>
+<!-- <script defer> alert('Hello!')</script> -->
+
+<!-- <?= Html::cssFile('@web/css/site.css', ['condition' => 'IE5']) ?> -->
+<?= Html::cssFile('@web/css/site.css') ?>
+
+<!-- [if IE 5] -->
+<!-- <link rel="stylesheet" type="text/css" href="css/site.css"> -->
+<!-- ![endif] -->
+<?= Html::jsFile('@web/js/jquery.cookie.js') ?>

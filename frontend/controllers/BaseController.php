@@ -21,7 +21,7 @@ class BaseController extends Controller
 						// 是否允许登录
 						'allow' => true,
 						// 允许路由 
-						'actions' => ['admin', 'widget'], 
+						'actions' => ['view','admin', 'widget', 'query'], 
 						// 角色限制
 						'roles' => ['@'],
 					],
@@ -44,5 +44,15 @@ class BaseController extends Controller
 		$model = \frontend\models\Country::findOne(['code' => 'CN']);
 
 		return $this->render('widget', ['model' => $model]);
+	}
+
+	public function actionQuery(){
+		$query = new \yii\db\Query();
+		$query->select('code, name')->from('country')->limit(10);
+		$command = $query->createCommand();
+		$sql = $command->sql;
+		$rows = $command->queryAll();
+
+		var_dump($command, $sql, $rows);die;
 	}
 }

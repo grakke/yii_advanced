@@ -137,7 +137,7 @@ Highcharts.theme = {
 			hoverSymbolStroke: '#FFFFFF',
 			theme: {
 				fill: {
-					linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
+					linearGradient: {x1: 0, y1: 0, x2: 0, y2: 1},
 					stops: [
 						[0.4, '#606060'],
 						[0.6, '#333333']
@@ -152,7 +152,7 @@ Highcharts.theme = {
 	rangeSelector: {
 		buttonTheme: {
 			fill: {
-				linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
+				linearGradient: {x1: 0, y1: 0, x2: 0, y2: 1},
 				stops: [
 					[0.4, '#888'],
 					[0.6, '#555']
@@ -166,7 +166,7 @@ Highcharts.theme = {
 			states: {
 				hover: {
 					fill: {
-						linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
+						linearGradient: {x1: 0, y1: 0, x2: 0, y2: 1},
 						stops: [
 							[0.4, '#BBB'],
 							[0.6, '#888']
@@ -179,7 +179,7 @@ Highcharts.theme = {
 				},
 				select: {
 					fill: {
-						linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
+						linearGradient: {x1: 0, y1: 0, x2: 0, y2: 1},
 						stops: [
 							[0.1, '#000'],
 							[0.3, '#333']
@@ -216,25 +216,25 @@ Highcharts.theme = {
 
 	scrollbar: {
 		barBackgroundColor: {
-				linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
-				stops: [
-					[0.4, '#888'],
-					[0.6, '#555']
-				]
-			},
+			linearGradient: {x1: 0, y1: 0, x2: 0, y2: 1},
+			stops: [
+				[0.4, '#888'],
+				[0.6, '#555']
+			]
+		},
 		barBorderColor: '#CCC',
 		buttonArrowColor: '#CCC',
 		buttonBackgroundColor: {
-				linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
-				stops: [
-					[0.4, '#888'],
-					[0.6, '#555']
-				]
-			},
+			linearGradient: {x1: 0, y1: 0, x2: 0, y2: 1},
+			stops: [
+				[0.4, '#888'],
+				[0.6, '#555']
+			]
+		},
 		buttonBorderColor: '#CCC',
 		rifleColor: '#FFF',
 		trackBackgroundColor: {
-			linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
+			linearGradient: {x1: 0, y1: 0, x2: 0, y2: 1},
 			stops: [
 				[0, '#000'],
 				[1, '#333']

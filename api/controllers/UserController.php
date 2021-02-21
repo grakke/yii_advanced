@@ -14,18 +14,18 @@ use yii\filters\auth\QueryParamAuth;
 
 class UserController extends ActiveController
 {
-    public $modelClass = 'api\models\User';
+	public $modelClass = 'api\models\User';
 
-    public function behaviors()
-    {
-        // $behaviors = parent::behaviors();
-        // $behaviors['rateLimiter']['enableRateLimitHeaders'] = true;
-        // return $behaviors;
+	public function behaviors()
+	{
+		// $behaviors = parent::behaviors();
+		// $behaviors['rateLimiter']['enableRateLimitHeaders'] = true;
+		// return $behaviors;
 
-        return ArrayHelper::merge(parent::behaviors(), [
-            'authenticator' => [
-                'class' => QueryParamAuth::className()
-            ]
-        ]);
-    }
+		return ArrayHelper::merge(parent::behaviors(), [
+			'authenticator' => [
+				'class' => QueryParamAuth::className()
+			]
+		]);
+	}
 }

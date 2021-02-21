@@ -12,13 +12,13 @@ use yii\base\Widget;
 
 class Lst extends Widget
 {
-    public $items = [];
+	public $items = [];
 
-    public function run()
-    {
-        // 渲染一个名为 "list" 的视图
-        return $this->render('list', [
-            'items' => $this->items,
-        ]);
-    }
+	public function run()
+	{
+		// 渲染一个名为 "list" 的视图
+		return $this->render('list', [
+			'items' => $this->items,
+		]);
+	}
 }

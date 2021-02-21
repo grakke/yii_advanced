@@ -14,22 +14,23 @@ use common\models\Sms;
  */
 class MailController extends Controller
 {
-	
-	public function actionSend(){
+
+	public function actionSend()
+	{
 
 		Yii::$app->mailer->compose([
-			    'html' => 'contact-html',
-			    'text' => 'contact-text',
-			],  [
-			    'user' => Yii::$app->user->identity,
-			    'advertisement' => $adContent,
-			])
-		    ->setFrom('liboming88@yeah.net')
-		    ->setTo('liboming@smg.cn')
-		    ->setSubject('Message subject')
-		    ->setTextBody('Plain text content')
-		    ->setHtmlBody('<b>HTML content</b>')
-		    ->send();
+			'html' => 'contact-html',
+			'text' => 'contact-text',
+		], [
+			'user' => Yii::$app->user->identity,
+			'advertisement' => $adContent,
+		])
+			->setFrom('liboming88@yeah.net')
+			->setTo('liboming@smg.cn')
+			->setSubject('Message subject')
+			->setTextBody('Plain text content')
+			->setHtmlBody('<b>HTML content</b>')
+			->send();
 	}
 
 }

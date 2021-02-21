@@ -6,7 +6,7 @@
  * License: www.highcharts.com/license
  */
 
-/* 
+/*
  * See www.highcharts.com/studies/world-map.htm for use case.
  *
  * To do:
@@ -29,9 +29,9 @@
 		plotOptions = defaultOptions.plotOptions,
 		wrap = Highcharts.wrap,
 		Color = Highcharts.Color,
-		noop = function () {};
+		noop = function () {
+		};
 
-	
 
 	/*
 	 * Return an intermediate color between two colors, according to pos where 0
@@ -85,7 +85,7 @@
 		// zoomOnMouseWheel: false
 
 	};
-	
+
 	/**
 	 * Utility for reading SVG paths directly.
 	 */
@@ -96,10 +96,10 @@
 		path = path.replace(/([A-Za-z])/g, ' $1 ');
 		// Trim
 		path = path.replace(/^\s*/, "").replace(/\s*$/, "");
-		
+
 		// Split on spaces and commas
 		path = path.split(/[ ,]+/);
-		
+
 		// Parse numbers
 		for (i = 0; i < path.length; i++) {
 			if (!/[a-zA-Z]/.test(path[i])) {
@@ -111,7 +111,7 @@
 
 	// A placeholder for map definitions
 	Highcharts.maps = {};
-	
+
 	/**
 	 * Override to use the extreme coordinates from the SVG shape, not the
 	 * data values
@@ -143,11 +143,11 @@
 				series.xData = xData[i]; // Reset xData array
 			}
 		});
-		
+
 		this.dataMin = dataMin;
 		this.dataMax = dataMax;
 	});
-	
+
 	/**
 	 * Override axis translation to make sure the aspect ratio is always kept
 	 */
@@ -159,21 +159,21 @@
 			adjustedAxisLength,
 			xAxis = chart.xAxis[0],
 			padAxis;
-		
+
 		// Run the parent method
 		proceed.call(this);
-		
+
 		// On Y axis, handle both
 		if (chart.options.chart.type === 'map' && !isXAxis && xAxis.transA !== UNDEFINED) {
-			
+
 			// Use the same translation for both axes
 			this.transA = xAxis.transA = Math.min(this.transA, xAxis.transA);
-			
+
 			mapRatio = (xAxis.max - xAxis.min) / (this.max - this.min);
-			
+
 			// What axis to pad to put the map in the middle
 			padAxis = mapRatio > plotRatio ? this : xAxis;
-			
+
 			// Pad it
 			adjustedAxisLength = (padAxis.max - padAxis.min) * padAxis.transA;
 			padAxis.minPixelPadding = (padAxis.len - adjustedAxisLength) / 2;
@@ -254,7 +254,7 @@
 
 		// Pinch status
 		if (options.mapNavigation.enableTouchZoom) {
-			this.pinchX = this.pinchHor = 
+			this.pinchX = this.pinchHor =
 				this.pinchY = this.pinchVert = true;
 		}
 	});
@@ -268,8 +268,8 @@
 				n,
 				button,
 				buttonOptions,
-				outerHandler = function () { 
-					this.handler.call(chart); 
+				outerHandler = function () {
+					this.handler.call(chart);
 				};
 
 			if (options.enableButtons) {
@@ -285,7 +285,10 @@
 							.css(buttonOptions.style)
 							.add();
 						button.handler = buttonOptions.onclick;
-						button.align(extend(buttonOptions, { width: button.width, height: button.height }), null, 'spacingBox');
+						button.align(extend(buttonOptions, {
+							width: button.width,
+							height: button.height
+						}), null, 'spacingBox');
 					}
 				}
 			}
@@ -314,7 +317,7 @@
 				if (inner[pos] < outer[pos]) {
 					inner[pos] = outer[pos];
 				}
-				
+
 			});
 
 			return inner;
@@ -369,7 +372,7 @@
 			chart.redraw();
 		}
 	});
-	
+
 	/**
 	 * Extend the default options with map options
 	 */
@@ -410,7 +413,7 @@
 			return point;
 		},
 		/**
-		 * Stop the fade-out 
+		 * Stop the fade-out
 		 */
 		onMouseOver: function () {
 			clearTimeout(this.colorInterval);
@@ -485,7 +488,7 @@
 				tmpLabel,
 				horizontal = chart.options.legend.layout === 'horizontal';
 
-			
+
 			Highcharts.Series.prototype.init.apply(this, arguments);
 			colorRange = series.options.colorRange;
 			valueRanges = series.options.valueRanges;
@@ -494,7 +497,7 @@
 				each(valueRanges, function (range) {
 					from = range.from;
 					to = range.to;
-					
+
 					// Assemble the default name. This can be overridden by legend.options.labelFormatter
 					name = '';
 					if (from === UNDEFINED) {
@@ -511,7 +514,7 @@
 					if (to !== UNDEFINED) {
 						name += numberFormat(to, valueDecimals);
 					}
-					
+
 					// Add a mock object to the legend items
 					legendItems.push(Highcharts.extend({
 						chart: series.chart,
@@ -519,8 +522,10 @@
 						options: {},
 						drawLegendSymbol: seriesTypes.area.prototype.drawLegendSymbol,
 						visible: true,
-						setState: function () {},
-						setVisible: function () {}
+						setState: function () {
+						},
+						setVisible: function () {
+						}
 					}, range));
 				});
 				series.legendItems = legendItems;
@@ -533,21 +538,21 @@
 				toLabel = colorRange.toLabel;
 
 				// Flips linearGradient variables and label text.
-				grad = horizontal ? [0, 0, 1, 0] : [0, 1, 0, 0]; 
+				grad = horizontal ? [0, 0, 1, 0] : [0, 1, 0, 0];
 				if (!horizontal) {
 					tmpLabel = fromLabel;
 					fromLabel = toLabel;
 					toLabel = tmpLabel;
-				} 
+				}
 
 				// Creates color gradient.
 				gradientColor = {
-					linearGradient: { x1: grad[0], y1: grad[1], x2: grad[2], y2: grad[3] },
-					stops: 
-					[
-						[0, from],
-						[1, to]
-					]
+					linearGradient: {x1: grad[0], y1: grad[1], x2: grad[2], y2: grad[3]},
+					stops:
+						[
+							[0, from],
+							[1, to]
+						]
 				};
 
 				// Add a mock object to the legend items.
@@ -559,8 +564,10 @@
 					color: gradientColor,
 					drawLegendSymbol: this.drawLegendSymbolGradient,
 					visible: true,
-					setState: function () {},
-					setVisible: function () {}
+					setState: function () {
+					},
+					setVisible: function () {
+					}
 				}];
 
 				series.legendItems = legendItems;
@@ -574,7 +581,7 @@
 
 		/**
 		 * Gets the series' symbol in the legend and extended legend with more information.
-		 * 
+		 *
 		 * @param {Object} legend The legend object
 		 * @param {Object} item The series (this) or point
 		 */
@@ -601,12 +608,12 @@
 
 			// Creates the from text.
 			item.fromText = this.chart.renderer.text(
-					item.fromLabel,	// Text.
-					positionX,		// Lower left x.
-					positionY		// Lower left y.
-				).attr({
-					zIndex: 2
-				}).add(item.legendGroup);
+				item.fromLabel,	// Text.
+				positionX,		// Lower left x.
+				positionY		// Lower left y.
+			).attr({
+				zIndex: 2
+			}).add(item.legendGroup);
 			box1 = item.fromText.getBBox();
 
 			// Creates legend symbol.
@@ -625,12 +632,12 @@
 			// Creates the to text.
 			// Vertical coordinate changed based on option.
 			item.toText = this.chart.renderer.text(
-					item.toLabel,
-					box2.x + box2.width + spacing,
-					horizontal ? positionY : box2.y + box2.height - spacing
-				).attr({
-					zIndex: 2
-				}).add(item.legendGroup);
+				item.toLabel,
+				box2.x + box2.width + spacing,
+				horizontal ? positionY : box2.y + box2.height - spacing
+			).attr({
+				zIndex: 2
+			}).add(item.legendGroup);
 			box3 = item.toText.getBBox();
 
 			// Changes legend box settings based on option.
@@ -648,22 +655,22 @@
 		 * Get the bounding box of all paths in the map combined.
 		 */
 		getBox: function (paths) {
-			var maxX = Number.MIN_VALUE, 
-				minX =  Number.MAX_VALUE, 
-				maxY = Number.MIN_VALUE, 
-				minY =  Number.MAX_VALUE;
-			
-			
+			var maxX = Number.MIN_VALUE,
+				minX = Number.MAX_VALUE,
+				maxY = Number.MIN_VALUE,
+				minY = Number.MAX_VALUE;
+
+
 			// Find the bounding box
 			each(paths || this.options.data, function (point) {
 				var path = point.path,
 					i = path.length,
 					even = false, // while loop reads from the end
-					pointMaxX = Number.MIN_VALUE, 
-					pointMinX =  Number.MAX_VALUE, 
-					pointMaxY = Number.MIN_VALUE, 
-					pointMinY =  Number.MAX_VALUE;
-					
+					pointMaxX = Number.MIN_VALUE,
+					pointMinX = Number.MAX_VALUE,
+					pointMaxY = Number.MIN_VALUE,
+					pointMinY = Number.MAX_VALUE;
+
 				while (i--) {
 					if (typeof path[i] === 'number' && !isNaN(path[i])) {
 						if (even) { // even = x
@@ -691,26 +698,25 @@
 			this.maxY = maxY;
 			this.minX = minX;
 			this.maxX = maxX;
-			
+
 		},
-		
-		
-		
+
+
 		/**
 		 * Translate the path so that it automatically fits into the plot area box
 		 * @param {Object} path
 		 */
 		translatePath: function (path) {
-			
+
 			var series = this,
 				even = false, // while loop reads from the end
 				xAxis = series.xAxis,
 				yAxis = series.yAxis,
 				i;
-				
+
 			// Preserve the original
 			path = [].concat(path);
-				
+
 			// Do the translation
 			i = path.length;
 			while (i--) {
@@ -725,12 +731,12 @@
 			}
 			return path;
 		},
-		
+
 		setData: function () {
 			Highcharts.Series.prototype.setData.apply(this, arguments);
 			this.getBox();
 		},
-		
+
 		/**
 		 * Add the path option for data points. Find the max value for color calculation.
 		 */
@@ -738,16 +744,16 @@
 			var series = this,
 				dataMin = Number.MAX_VALUE,
 				dataMax = Number.MIN_VALUE;
-	
+
 			series.generatePoints();
-	
+
 			each(series.data, function (point) {
-				
+
 				point.shapeType = 'path';
 				point.shapeArgs = {
 					d: series.translatePath(point.path)
 				};
-				
+
 				// TODO: do point colors in drawPoints instead of point.init
 				if (typeof point.y === 'number') {
 					if (point.y > dataMax) {
@@ -757,15 +763,15 @@
 					}
 				}
 			});
-			
+
 			series.translateColors(dataMin, dataMax);
 		},
-		
+
 		/**
 		 * In choropleth maps, the color is a result of the value, so this needs translation too
 		 */
 		translateColors: function (dataMin, dataMax) {
-			
+
 			var seriesOptions = this.options,
 				valueRanges = seriesOptions.valueRanges,
 				colorRange = seriesOptions.colorRange,
@@ -777,7 +783,7 @@
 				from = Color(colorRange.from);
 				to = Color(colorRange.to);
 			}
-			
+
 			each(this.data, function (point) {
 				var value = point[colorKey],
 					range,
@@ -795,7 +801,7 @@
 							color = range.color;
 							break;
 						}
-							
+
 					}
 				} else if (colorRange && value !== undefined) {
 
@@ -809,16 +815,16 @@
 				}
 			});
 		},
-		
+
 		drawGraph: noop,
-		
+
 		/**
-		 * We need the points' bounding boxes in order to draw the data labels, so 
+		 * We need the points' bounding boxes in order to draw the data labels, so
 		 * we skip it now and call if from drawPoints instead.
 		 */
 		drawDataLabels: noop,
-		
-		/** 
+
+		/**
 		 * Use the drawPoints method of column, that is able to handle simple shapeArgs.
 		 * Extend it by assigning the tooltip position.
 		 */
@@ -827,7 +833,7 @@
 				xAxis = series.xAxis,
 				yAxis = series.yAxis,
 				colorKey = series.colorKey;
-			
+
 			// Make points pass test in drawing
 			each(series.data, function (point) {
 				point.plotY = 1; // pass null test in column.drawPoints
@@ -836,10 +842,10 @@
 					point.isNull = true;
 				}
 			});
-			
+
 			// Draw them
 			seriesTypes.column.prototype.drawPoints.apply(series);
-			
+
 			each(series.data, function (point) {
 
 				var dataLabels = point.dataLabels,
@@ -849,9 +855,9 @@
 					maxY = yAxis.toPixels(point._maxY, true);
 
 				point.plotX = Math.round(minX + (maxX - minX) * pick(dataLabels && dataLabels.anchorX, 0.5));
-				point.plotY = Math.round(minY + (maxY - minY) * pick(dataLabels && dataLabels.anchorY, 0.5)); 
-				
-				
+				point.plotY = Math.round(minY + (maxY - minY) * pick(dataLabels && dataLabels.anchorY, 0.5));
+
+
 				// Reset escaped null points
 				if (point.isNull) {
 					point[colorKey] = null;
@@ -860,7 +866,7 @@
 
 			// Now draw the data labels
 			Highcharts.Series.prototype.drawDataLabels.call(series);
-			
+
 		},
 
 		/**
@@ -873,7 +879,7 @@
 				fromBox = level.bBox,
 				animationOptions = this.chart.options.drilldown.animation,
 				scale;
-				
+
 			if (!init) {
 
 				scale = Math.min(fromBox.width / toBox.width, fromBox.height / toBox.height);
@@ -883,7 +889,7 @@
 					translateX: fromBox.x,
 					translateY: fromBox.y
 				};
-				
+
 				// TODO: Animate this.group instead
 				each(this.points, function (point) {
 
@@ -900,7 +906,7 @@
 
 				delete this.animate;
 			}
-			
+
 		},
 
 		/**
@@ -951,14 +957,13 @@
 	seriesTypes.mappoint = Highcharts.extendClass(seriesTypes.scatter, {
 		type: 'mappoint'
 	});
-	
 
-	
+
 	/**
 	 * A wrapper for Chart with all the default values for a Map
 	 */
 	Highcharts.Map = function (options, callback) {
-		
+
 		var hiddenAxis = {
 				endOnTick: false,
 				gridLineWidth: 0,
@@ -973,30 +978,30 @@
 				title: null
 			},
 			seriesOptions;
-		
+
 		// Don't merge the data
 		seriesOptions = options.series;
 		options.series = null;
-		
+
 		options = merge({
-			chart: {
-				type: 'map',
-				panning: 'xy'
+				chart: {
+					type: 'map',
+					panning: 'xy'
+				},
+				xAxis: hiddenAxis,
+				yAxis: merge(hiddenAxis, {reversed: true})
 			},
-			xAxis: hiddenAxis,
-			yAxis: merge(hiddenAxis, { reversed: true })	
-		},
-		options, // user's options
-	
-		{ // forced options
-			chart: {
-				inverted: false
-			}
-		});
-	
+			options, // user's options
+
+			{ // forced options
+				chart: {
+					inverted: false
+				}
+			});
+
 		options.series = seriesOptions;
-	
-	
+
+
 		return new Highcharts.Chart(options, callback);
 	};
 }(Highcharts));

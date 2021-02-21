@@ -7,11 +7,11 @@ use yii\rest\ActiveController;
 class GoodsController extends ActiveController
 {
 
-    public $modelClass = 'api\models\Goods';
+	public $modelClass = 'api\models\Goods';
 
-    public function actionIndex()
-    {
-        return $this->render('index');
-    }
+	public function actionIndex()
+	{
+		return $this->render('index');
+	}
 
 }

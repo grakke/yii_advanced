@@ -13,18 +13,18 @@ use yii\jui\Widget;
 
 class HelloWidget extends Widget
 {
-    public $message;
+	public $message;
 
-    public function init()
-    {
-        parent::init();
-        if ($this->message === null) {
-            $this->message = 'Hello world!';
-        }
-    }
+	public function init()
+	{
+		parent::init();
+		if ($this->message === null) {
+			$this->message = 'Hello world!';
+		}
+	}
 
-    public function run()
-    {
-        return Html::encode($this->message);
-    }
+	public function run()
+	{
+		return Html::encode($this->message);
+	}
 }

@@ -13,17 +13,17 @@ use yii\web\Controller;
 
 class ContentController extends Controller
 {
-    public $layout = 'adminlte';
-    public $enableCsrfValidation =false;
+	public $layout = 'adminlte';
+	public $enableCsrfValidation = false;
 
-    public function actionUpdate()
-    {
-        if (\Yii::$app->request->isPost){
-            echo '<pre>';
-            var_dump($_POST);
-            die;
-        }
+	public function actionUpdate()
+	{
+		if (\Yii::$app->request->isPost) {
+			echo '<pre>';
+			var_dump($_POST);
+			die;
+		}
 
-        return $this->render('update');
-    }
+		return $this->render('update');
+	}
 }

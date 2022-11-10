@@ -23,6 +23,4 @@ return [
 	],
 
 	'language' => isset($_COOKIE['language']) ? $_COOKIE['language'] : 'zh',
-
-
 ];

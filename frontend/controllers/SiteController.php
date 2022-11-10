@@ -1,9 +1,9 @@
 <?php
 namespace frontend\controllers;
 
+use frontend\models\EntryForm;
 use Yii;
 use yii\base\InvalidParamException;
-use yii\helpers\Url;
 use yii\web\BadRequestHttpException;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
@@ -77,6 +77,37 @@ class SiteController extends Controller
         return $this->render('index');
     }
 
+	/**
+	 * Displays about page.
+	 *
+	 * @return mixed
+	 */
+	public function actionAbout()
+	{
+		return $this->render('about');
+	}
+
+	/**
+	 * Signs user up.
+	 *
+	 * @return mixed
+	 */
+	public function actionSignup()
+	{
+		$model = new SignupForm();
+		if ($model->load(Yii::$app->request->post())) {
+			if ($user = $model->signup()) {
+				if (Yii::$app->getUser()->login($user)) {
+					return $this->goHome();
+				}
+			}
+		}
+
+		return $this->render('signup', [
+			'model' => $model,
+		]);
+	}
+
     /**
      * Logs in a user.
      *
@@ -136,37 +167,6 @@ class SiteController extends Controller
     }
 
     /**
-     * Displays about page.
-     *
-     * @return mixed
-     */
-    public function actionAbout()
-    {
-        return $this->render('about');
-    }
-
-    /**
-     * Signs user up.
-     *
-     * @return mixed
-     */
-    public function actionSignup()
-    {
-        $model = new SignupForm();
-        if ($model->load(Yii::$app->request->post())) {
-            if ($user = $model->signup()) {
-                if (Yii::$app->getUser()->login($user)) {
-                    return $this->goHome();
-                }
-            }
-        }
-
-        return $this->render('signup', [
-            'model' => $model,
-        ]);
-    }
-
-    /**
      * Requests password reset.
      *
      * @return mixed
@@ -216,6 +216,7 @@ class SiteController extends Controller
     }
 
     /**
+	 * http://local.yii.com/site/say?message=Hello+World111
      * @param string $message
      * @return string
      * @throws \yii\base\InvalidArgumentException

@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use backend\components\MyBehavior;
 use Yii;
 
 /**
@@ -23,6 +24,31 @@ use Yii;
  */
 class User extends \yii\db\ActiveRecord
 {
+	public function behaviors()
+	{
+		return [
+			// 匿名的行为，仅直接给出行为的类名称
+			MyBehavior::className(),
+
+			// 名为myBehavior2的行为，也是仅给出行为的类名称
+			'myBehavior2' => MyBehavior::className(),
+
+			// 匿名行为，给出了MyBehavior类的配置数组
+			[
+				'class' => MyBehavior::className(),
+				'prop1' => 'value1',
+				'prop3' => 'value3',
+			],
+
+			// 名为myBehavior4的行为，也是给出了MyBehavior类的配置数组
+			'myBehavior4' => [
+				'class' => MyBehavior::className(),
+				'prop1' => 'value1',
+				'prop3' => 'value3',
+			]
+		];
+	}
+
 	/**
 	 * {@inheritdoc}
 	 */

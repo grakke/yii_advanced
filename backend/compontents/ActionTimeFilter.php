@@ -1,6 +1,6 @@
 <?php
 
-namespace backend\component;
+namespace backend\components;
 
 use ArrayHelper;
 use Yii;

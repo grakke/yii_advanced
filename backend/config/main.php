@@ -11,6 +11,7 @@ return [
 	'basePath' => dirname(__DIR__),
 	'controllerNamespace' => 'backend\controllers',
 	'bootstrap' => ['log', 'admin'],
+	'homeUrl' => '/admin',
 	'modules' => [
 		'gii' => [
 			'class' => 'yii\gii\Module',
@@ -39,6 +40,7 @@ return [
 	],
 	'components' => [
 		'request' => [
+			'baseUrl' => '/admin',
 			'csrfParam' => '_csrf-backend',
 		],
 		'user' => [
@@ -80,7 +82,7 @@ return [
 			'ruleTable' => '{{%auth_rule}}'
 		],
 		'urlManager' => [
-			'enablePrettyUrl' => false,
+			'enablePrettyUrl' => true,
 			'showScriptName' => false,
 			'rules' => [
 //                'posts/<year:\d{4}>/<category>' => 'post/index',

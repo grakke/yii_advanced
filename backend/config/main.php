@@ -17,26 +17,26 @@ return [
 			'class' => 'yii\gii\Module',
 			'allowedIPs' => ['127.0.0.1', '192.168.83.1', '::1']
 		],
-		'admin' => [
-			'class' => 'mdm\admin\Module',
-			'layout' => 'main', // it can be '@path/to/your/layout'.
-			'controllerMap' => [
-				'assignment' => [
-					'class' => 'mdm\admin\controllers\AssignmentController',
-					'userClassName' => 'backend\models\User',
-					'idField' => 'user_id'
-				],
-				'other' => [
-					'class' => 'path\to\OtherController', // add another controller
-				],
-			],
-			// 'menus' => [
-			//     'assignment' => [
-			//         'label' => 'Grand Access' // change label
-			//     ],
-			//     'route' => null, // disable menu route
-			// ]
-		],
+//		'admin' => [
+//			'class' => 'mdm\admin\Module',
+//			'layout' => 'main', // it can be '@path/to/your/layout'.
+//			'controllerMap' => [
+//				'assignment' => [
+//					'class' => 'mdm\admin\controllers\AssignmentController',
+//					'userClassName' => 'backend\models\User',
+//					'idField' => 'user_id'
+//				],
+//				'other' => [
+//					'class' => 'path\to\OtherController', // add another controller
+//				],
+//			],
+		// 'menus' => [
+		//     'assignment' => [
+		//         'label' => 'Grand Access' // change label
+		//     ],
+		//     'route' => null, // disable menu route
+		// ]
+//		],
 	],
 	'components' => [
 		'request' => [
@@ -57,6 +57,20 @@ return [
 			'targets' => [
 				[
 					'class' => 'yii\log\FileTarget',
+					'levels' => ['error', 'warning'],
+					'categories' => [
+						'yii\db\*',
+						'yii\web\HttpException:*',
+						'yii\swiftmailer\Logger::add'
+					],
+					'except' => [
+						'yii\web\HttpException:404',
+					],
+					'prefix' => function ($message) {
+						$user = Yii::$app->has('user', true) ? Yii::$app->get('user') : null;
+						$userID = $user ? $user->getId(false) : '-';
+						return "[$userID]";
+					}
 					// 'transport' => [
 					//     'class' => 'Swift_SmtpTransport',
 					//     'host' => 'localhost',
@@ -65,14 +79,13 @@ return [
 					//     'port' => '587',
 					//     'encryption' => 'tls',
 					// ],
-					'categories' => ['yii\swiftmailer\Logger::add'],
-					'levels' => ['error', 'warning'],
 				],
 			],
 		],
 		// 异常处理方法配置
 		'errorHandler' => [
 			'errorAction' => 'site/error',
+			'maxSourceLines' => 20,
 		],
 		'authManager' => [
 			'class' => 'yii\rbac\DbManager',

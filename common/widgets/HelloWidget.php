@@ -8,8 +8,8 @@
 
 namespace common\widgets;
 
+use yii\base\Widget;
 use yii\helpers\Html;
-use yii\jui\Widget;
 
 class HelloWidget extends Widget
 {

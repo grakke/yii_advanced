@@ -10,12 +10,6 @@ return [
 	'basePath' => dirname(__DIR__),
 	'controllerNamespace' => 'api\controllers',
 	'bootstrap' => ['log'],
-	'modules' => [
-		'gii' => [
-			'class' => 'yii\gii\Module',
-//            'allowedIPs' => ['127.0.0.1', '192.168.83.1', '::1']
-		]
-	],
 	'components' => [
 		'request' => [
 			'csrfParam' => '_csrf-api',
@@ -68,6 +62,10 @@ return [
 		'v1' => [
 			'class' => 'api\modules\v1\Module',
 		],
+		'gii' => [
+			'class' => 'yii\gii\Module',
+			'allowedIPs' => ['127.0.0.1', '192.168.83.1', '::1']
+		]
 	],
 	'params' => $params,
 ];
